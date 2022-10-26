@@ -89,3 +89,63 @@ Run sysinternal tool <b>autorun.exe</b> and check the services. See the path loc
 ```
 Flag : FIN2022{C:\Program Files (x86)\Windows Resource Kits\Tools\Data Backup App\Backup.exe}
 ```
+
+
+
+<h2>Injection 5: 150</h2>
+Refer to the injection 3 & 4, which account privilege was gained by the attacker after exploiting the misconfigured program?
+
+The format for this flag is <b>FIN2022{AccountDomain\AccountName}</b>
+
+<h3>Solution :</h3>
+
+Check the event log with filtering....... 
+
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/special_priv.PNG)
+
+
+```
+Flag : FIN2022{NT Authority\System}
+```
+
+
+
+<h2>Injection 6: 50</h2>
+Find out the IP address attacker which was used to controlling support-pc?
+
+The format for this flag is <b>FIN2022{IP ADDRESS}</b>
+
+<h3>Solution :</h3>
+
+Check the event log with filtering....... 
+
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/attacker_ip.PNG)
+
+
+```
+Flag : FIN2022{192.168.187.135}
+```
+
+
+
+<h2>Injection 7: 100</h2>
+What was the ip of the support-pc when it was compromised?
+
+The format for this flag is <b>FIN2022{IP Address}</b>
+
+<h3>Solution :</h3>
+
+Check the event log with filtering....... 
+
+Take a look at the log, and check your current ip address. it is same as the below image address. So the IP address with be the last one before the IP change.
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/after_change_IP.png)
+
+Now check the IP address of this PC. Compare the time between this two log and you will get the actual result.
+
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/before_change.PNG)
+
+
+
+```
+Flag : FIN2022{192.168.187.149}
+```
