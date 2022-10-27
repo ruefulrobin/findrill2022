@@ -79,7 +79,7 @@ The format for this flag is <b>FIN2022{E:\Fin\Drill\2022\ctf.txt}</b>
 
 Run sysinternal tool <b>autorun.exe</b> and check the services. See the path location of the services databackupsvc and go to the file path. If you go one step back you will see the file backup.exe which is the actual file. To confirm that the file is malicious, collect the hash value of the file and check this to the virus total.
 
-![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/location.png)
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/location.PNG)
 
 <b>Virus Total Result:</b>
 
@@ -138,7 +138,7 @@ The format for this flag is <b>FIN2022{IP Address}</b>
 Check the event log with filtering....... 
 
 Take a look at the log, and check your current ip address. it is same as the below image address. So the IP address with be the last one before the IP change.
-![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/after_change_IP.png)
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/after_change_ip.PNG)
 
 Now check the IP address of this PC. Compare the time between this two log and you will get the actual result.
 
@@ -148,4 +148,53 @@ Now check the IP address of this PC. Compare the time between this two log and y
 
 ```
 Flag : FIN2022{192.168.187.149}
+```
+
+
+<h2>Injection 8: 100</h2>
+An application was executed by the attacker to collect domain object information from DC. What is the application name?
+
+The format for this flag is <b>FIN2022{filename with extension}</b>
+
+<h3>Solution :</h3>
+
+There are few tools and techniques to collect the information from Domain Controller. BloodHound is an Active Directory (AD) reconnaissance tool that can reveal hidden relationships and identify attack paths within an AD environment. 
+
+SharpHound is the official data collector for BloodHound. It is written in C# and uses native Windows API functions and LDAP namespace functions to collect data from domain controllers and domain-joined Windows systems by executing ><b>sharphound.exe</b> or <b>sharphound.ps1</b> script. Both of them provide json data of the DC, after importing the json data in the bloodhound attacker get the DC information.
+
+Now take a look at the event log, and search if there anything in the name of sharphound.
+
+Here we found that there is a log with sharphound.exe
+
+![image](https://github.com/ruefulrobin/findrill2022/blob/main/img/sharphound.PNG)
+
+```
+Flag : FIN2022{sharphound.exe}
+```
+
+
+<h2>Injection 9: 150</h2>
+During the post exploitation phase, which attack method was used by the attacker to get user details from DC?
+
+The format for this flag is <b>FIN2022{FLAG}</b>
+
+<h3>Solution :</h3>
+
+
+<b>What Are DCSync Attacks?</b>
+
+DCSync is an attack that allows an adversary to simulate the behavior of a domain controller (DC) and retrieve password data via domain replication.
+
+These attacks leverage what is a necessary function in Active Directory, which complicates attempts to prevent them. Large-scale networks require many DCs to function, and each of those DCs need to have up-to-date information. That requires a function allowing one DC to update another DC on any changes, like updated credential information.
+
+Attackers subvert that necessary function by pretending to be a DC and using the DSGetNCChanges function to request password hashes. A common attack uses this method to get the KRBTGT hash, which brings them one step closer to getting a Kerberos "golden ticket."
+
+DCSync requires a compromised user account with domain replication privileges. Once that is established, one can find a domain controller, tell it to replicate, and get password hashes from its subsequent response.
+
+As I told that, The <b>Bloohound</b> tool gather information of a DC after compromised an user account with the special privileges how dcsync do.
+
+
+
+```
+Flag : FIN2022{dcsync}
 ```
