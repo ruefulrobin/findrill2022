@@ -181,7 +181,7 @@ The format for this flag is <b>FIN2022{FLAG}</b>
 <h3>Solution :</h3>
 
 
-<b>What Are DCSync Attacks?</b>
+<b>What is DCSync Attacks?</b>
 
 DCSync is an attack that allows an adversary to simulate the behavior of a domain controller (DC) and retrieve password data via domain replication.
 
